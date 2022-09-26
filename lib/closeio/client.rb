@@ -1,5 +1,4 @@
 require 'faraday'
-require 'faraday_middleware'
 require_relative 'error'
 require_relative 'version'
 
@@ -98,7 +97,7 @@ module Closeio
         conn.request    :json
         conn.response   :logger if logger
         conn.response   :json
-        conn.use        FaradayMiddleware::CloseioErrorHandler if errors
+        conn.use        Faraday::CloseioErrorHandler if errors
         conn.adapter    Faraday.default_adapter
       end
     end
